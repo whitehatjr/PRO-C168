@@ -1,87 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Menu Card</title>
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
 
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+<head>
+  <title>Menu Card</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <!-- Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <!-- Local StyleSheet -->
-    <link href="./style.css" rel="stylesheet" />
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
 
-    <script src="./js/markerHandler.js"></script>
-  </head>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
-  <body style="margin : 0px; overflow: hidden;">
-    <a-scene
-      embedded
-      vr-mode-ui="enabled: false"
-      renderer="logarithmicDepthBuffer: true;"
-      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;debugUIEnabled: false;"
-      gesture-detector
-    >
-      <a-assets>
-        <a-asset-item
-          id="pizza-model"
-          src="./assets/pizza/scene.gltf"
-        ></a-asset-item>
-      </a-assets>
+  <!-- Local StyleSheet -->
+  <link href="./style.css" rel="stylesheet" />
 
-      <a-marker
-        id="pizza-marker"
-        type="pattern"
-        url="assets/dish-markers/pattern-pizza.patt"
-        cursor="rayOrigin: mouse"
-        markerhandler
-      >
-        <a-entity
-          id="animated-model"
-          position="-2 0 0"
-          scale="0.05 0.05 0.05"
-          gltf-model="#pizza-model"
-          gesture-handler
-        ></a-entity>
+  <!--JS Files-->
+  <script src="./js/addButtons.js"></script>
 
-        <a-entity
-          position="1 0 -1.3"
-          rotation="-90 0 0"
-          text="color: #EF2D5E; align: center; width: 8; font: monoid;
-               value:PIZZA MARGHERITA"
-        ></a-entity>
+</head>
 
-        <a-entity
-          position="2 0 -0.8"
-          rotation="-90 0 0"
-          text="color: #ef9a9a; align: left; width: 5; font: monoid;
-               value: INGRADIANS:"
-        ></a-entity>
+<body style="margin : 0px; overflow: hidden;">
 
-        <a-entity
-          position="2.3 0 0.3"
-          rotation="-90 0 0"
-          text="color: #d84315; align: left; width: 5; font: monoid;
-               value: Tomato sauce\nMozzarella cheese\nParmesan cheese (optional)\nFresh Basil\nOlive oil\nBlack pepper (optional)"
-        ></a-entity>
-      </a-marker>
+  <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; 
+    sourceWidth:1280; sourceHeight:960; 
+    displayWidth: 1280; displayHeight: 960; 
+    debugUIEnabled: false;" gesture-detector create-buttons>
 
-      <!-- Camera -->
-      <a-entity camera></a-entity>
-    </a-scene>
+    <!-- Camera -->
+    <a-entity camera></a-entity>
 
-    <!-- Button Main Div -->
-    <div id="button-div"></div>
-  </body>
+    <a-assets>
+      <a-asset-item id="pizza-model" src="./assets/pizza/scene.gltf"></a-asset-item>
+    </a-assets>
+
+    <!--Pattern Marker-->
+    <a-marker id="pizza-marker" type="pattern" url="assets/dish-markers/pattern-pizza.patt" cursor="rayOrigin: mouse">
+      
+      <a-entity id="pizza-3D-model" position="-1 0 0" scale="0.05 0.05 0.05" 
+        gltf-model="#pizza-model"
+        gesture-handler>
+      </a-entity>
+
+
+      <!-- Ingredients -->
+      <a-plane position="0 0 0" width="1.5" height="1.5" rotation="-90 0 0">
+        <a-plane position="0 0.89 0.02" width="1.49" height="0.3" rotation="0 0 0" color="#F0C30F">
+          <a-entity position="0 0 0.1" rotation="0 0 0"
+            text="font:monoid;value:PIZZA MARGHERITA;color:black;width: 1.8;height:1;align:center;"></a-entity>
+        </a-plane>
+
+        <a-entity position="0 0 0.1" rotation="0 0 0"
+          text="color: black; align: center; width: 2; font: monoid;
+               value: Tomato sauce\n\nMozzarella cheese\n\nParmesan cheese (optional)\n\nFresh Basil\n\nOlive oil\n\nBlack pepper (optional)">
+        </a-entity>
+      </a-plane>
+
+    </a-marker>
+
+
+  </a-scene>
+
+  <!-- Button Main Div -->
+  <div id="button-div"></div>
+
+</body>
+
 </html>

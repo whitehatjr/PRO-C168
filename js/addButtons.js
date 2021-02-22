@@ -1,4 +1,4 @@
-AFRAME.registerComponent("markerhandler", {
+AFRAME.registerComponent("create-buttons", {
   init: function() {
     // 1. Create the button
     var button1 = document.createElement("button");
@@ -12,9 +12,11 @@ AFRAME.registerComponent("markerhandler", {
     button2.setAttribute("id", "order-button");
     button2.setAttribute("class", "btn btn-warning");
 
-    // 2. Append somewhere
+    // 2. Append button elements
     var buttonDiv = document.getElementById("button-div");
     buttonDiv.appendChild(button1);
     buttonDiv.appendChild(button2);
   }
 });
+
+
